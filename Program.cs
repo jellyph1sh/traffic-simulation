@@ -1,5 +1,4 @@
-﻿using System;
-using TrafficSimulation;
+﻿using TrafficSimulation;
 
 namespace Main
 {
@@ -9,7 +8,7 @@ namespace Main
         {
             Console.Clear();
 
-            Pedestrian pedestrian = new Pedestrian("test", 1, 2);
+            Pedestrian pedestrian = new Pedestrian(1, 1, 2);
         }
     }
 }

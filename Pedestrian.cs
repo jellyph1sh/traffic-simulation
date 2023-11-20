@@ -1,21 +1,18 @@
-using System;
-using System.Numerics;
-
 namespace TrafficSimulation
 {
     public class Pedestrian {
-        public string name;
-        public int spwan;
-        public int direction;
+        public int id;
+        public int spwan { get; set;}
+        public int direction { get; set;}
 
-        public Pedestrian(string name, int spwan, int direction){
-            this.name = name;
+        public Pedestrian(int id, int spwan, int direction){
+            this.id = id;
             this.spwan = spwan;
             this.direction = direction;
         }
 
-        public void ToCross(){
-            Console.WriteLine("{0} cross the street to footpath {1}.", this.name, this.direction);
+        public string ToCross(){
+            return String.Format("The pedestrian {0} cross the street to footpath {1}.", this.id, this.direction);
         }
     }
 }
