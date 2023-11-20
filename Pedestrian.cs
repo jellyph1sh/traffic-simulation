@@ -5,15 +5,17 @@ namespace TrafficSimulation
 {
     public class Pedestrian {
         public string name;
-        public Vector2 position;
+        public int spwan;
+        public int direction;
 
-        public Pedestrian(string name, Vector2 position){
+        public Pedestrian(string name, int spwan, int direction){
             this.name = name;
-            this.position = position;
+            this.spwan = spwan;
+            this.direction = direction;
         }
 
-        public void CrossStreet(Vector2 nextPosition){
-            this.position = nextPosition;
+        public void ToCross(){
+            Console.WriteLine("{0} cross the street to footpath {1}.", this.name, this.direction);
         }
     }
 }
