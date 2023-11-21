@@ -8,24 +8,12 @@ namespace TrafficSimulation
         Bus,
         Motorcycle
     }
-    interface IVehicule
-    {
-        int Direction { get; set; }
-        int Way { get; set; }
-        string ToStringInfos();
-    }
-    public class Vehicule : IVehicule
+    public class Vehicule : Entitie, IEntitie
     {   
-        public int id;
         public VehiculeType type = VehiculeType.Car;
-        public int way;
-        public int direction;
-        public Vehicule()
+        public Vehicule():base()
         {
-            this.id = 0;
             this.type = VehiculeType.Car;
-            this.way = 1;
-            this.direction = 1;
         }
         public Vehicule(int id, VehiculeType type, int way, int direction)
         {
@@ -66,7 +54,7 @@ namespace TrafficSimulation
                 }
             }
         }
-        public string ToStringInfos()
+        public override string ToStringInfos()
         {
             return String.Format("The {0} {1} takes the {2} exit and ends up on the {3} way", this.type, this.id, this.direction, this.way);
         }
