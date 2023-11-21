@@ -1,19 +1,19 @@
-namespace TrafficSimulation
+namespace TrafficSimulation.Entities.Vehicle
 {
-    public class Pedestrian : Entitie, IEntitie 
-    {
-        public Pedestrian():base()
+    public class Vehicle : Entity, IEntity
+    {   
+        public VehicleType type = VehicleType.Car;
+        public Vehicle():base()
         {
-            this.id = 0;
-            this.way = 1;
-            this.direction = 1;
+            this.type = VehicleType.Car;
         }
-        public Pedestrian(int id, int way, int direction){
+        public Vehicle(int id, VehicleType type, int way, int direction)
+        {
             this.id = id;
+            this.type = type;
             this.way = way;
             this.direction = direction;
         }
-
         public int Direction
         {
             get { return direction; }
@@ -46,10 +46,9 @@ namespace TrafficSimulation
                 }
             }
         }
-
-
-        public override string ToStringInfos(){
-            return String.Format("The pedestrian {0} take the {1} footpath to move on the {2} way.", this.id, this.direction, this.way);
+        public override string ToStringInfos()
+        {
+            return String.Format("The {0} {1} takes the {2} exit and ends up on the {3} way", this.type, this.id, this.direction, this.way);
         }
     }
 }

@@ -1,10 +1,12 @@
-﻿﻿namespace TrafficSimulation.Run
+﻿namespace TrafficSimulation.Run
 {
     class Program
     {
+        static Traffic traffic;
         static void Main(string[] str)
         {
-            SelectIntersectionMenu();
+            int intersection = SelectIntersectionMenu();
+            traffic = new Traffic(intersection);
         }
 
         private static int SelectIntersectionMenu()

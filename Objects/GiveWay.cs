@@ -1,4 +1,5 @@
-namespace TrafficSimulation {
+namespace TrafficSimulation.Objects
+{
     public class GiveWay {
         
     }

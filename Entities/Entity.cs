@@ -1,22 +1,16 @@
-namespace TrafficSimulation
-{   
-    interface IEntitie
-    {
-        int Direction { get; set; }
-        int Way { get; set; }
-        string ToStringInfos();
-    }
-    public abstract class Entitie {
+namespace TrafficSimulation.Entities
+{
+    public abstract class Entity {
         public int id;
         public int way;
         public int direction;
 
-        public Entitie(){
+        public Entity(){
             this.id = 0;
             this.way = 1;
             this.direction = 1;
         }
-        public Entitie(int id, int way, int direction){
+        public Entity(int id, int way, int direction){
             this.id = id;
             this.way = way;
             this.direction = direction;
