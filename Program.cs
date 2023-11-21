@@ -1,4 +1,4 @@
-﻿namespace TrafficSimulation.Run
+﻿﻿namespace TrafficSimulation.Run
 {
     class Program
     {
