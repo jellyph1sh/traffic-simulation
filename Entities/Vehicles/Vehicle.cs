@@ -13,6 +13,7 @@ namespace TrafficSimulation.Entities.Vehicle
             this.type = type;
             this.way = way;
             this.direction = direction;
+            Console.WriteLine(String.Format("A {0} arrives on way {1} and stops at the red light.", this.type, this.way));
         }
         public int Direction
         {
@@ -48,7 +49,7 @@ namespace TrafficSimulation.Entities.Vehicle
         }
         public override string ToStringInfos()
         {
-            return String.Format("The {0} {1} takes the {2} exit and ends up on the {3} way", this.type, this.id, this.direction, this.way);
+            return String.Format("The {0}{1} on the way {2} moves forward into way {3} and exits the intersection.", this.type, this.id, this.way, this.direction);
         }
     }
 }
