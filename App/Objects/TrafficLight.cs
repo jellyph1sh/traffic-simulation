@@ -1,31 +1,41 @@
 namespace TrafficSimulation.Objects
 {
     public class TrafficLight {
-        public int wayId;
-        public TrafficLightColor Color = TrafficLightColor.Red;
+        private int _wayId;
+        private TrafficLightColor _color = TrafficLightColor.Red;
         
         public TrafficLight(int wayId)
         {
-            this.wayId = wayId;
+            this._wayId = wayId;
+        }
+
+        public int wayId
+        {
+            get { return _wayId; }
+        }
+
+        public TrafficLightColor Color
+        {
+            get { return _color; }
         }
 
         public void SetNextTrafficLightColor()
         {
-            switch(this.Color){
+            switch(this._color){
                 case TrafficLightColor.Green:
-                    this.Color = TrafficLightColor.Orange;
+                    this._color = TrafficLightColor.Orange;
                     break;
                 case TrafficLightColor.Orange:
-                    this.Color = TrafficLightColor.Red;
+                    this._color = TrafficLightColor.Red;
                     break;
                 case TrafficLightColor.Red:
-                    this.Color = TrafficLightColor.Green;
+                    this._color = TrafficLightColor.Green;
                     break;
                 default:
-                    this.Color = TrafficLightColor.None;
+                    this._color = TrafficLightColor.None;
                     break;
             }
-            Console.WriteLine(String.Format("Trafficlight way {0}, turn on {1}.", this.wayId, this.Color));
+            Console.WriteLine(String.Format("Trafficlight way {0}, turn on {1}.", this._wayId, this._color));
         }
     }
 }

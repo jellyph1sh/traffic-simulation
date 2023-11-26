@@ -2,54 +2,41 @@ namespace TrafficSimulation.Entities.Pedestrian
 {
     public class Pedestrian : Entity, IEntity 
     {
-        public Pedestrian():base()
+        public Pedestrian(int id, int way, int direction) : base(id, way, direction) {}
+
+        public int Id
         {
-            this.id = 0;
-            this.way = 1;
-            this.direction = 1;
+            get { return this._id; }
+            set
+            {
+                if (value < 0) return;
+                _id = value;
+            }
         }
-        public Pedestrian(int id, int way, int direction){
-            this.id = id;
-            this.way = way;
-            this.direction = direction;
+
+        public int Way
+        {
+            get { return _way; }
+            set
+            {
+                if (value < 1 || value > 4) return;
+                _way = value;
+            }
         }
 
         public int Direction
         {
-            get { return direction; }
-            set 
-            { 
-                direction = value;
-                if (direction < 1)
-                {
-                    direction = 1;
-                }
-                else if (direction > 4)
-                {
-                    direction = 4;
-                }
+            get { return _direction; }
+            set
+            {
+                if (value < 1 || value > 4) return;
+                _direction = value;
             }
         }
-        public int Way
+
+        public override string ToStringInfos()
         {
-            get { return way; }
-            set 
-            { 
-                way = value;
-                if (way < 1)
-                {
-                    way = 1;
-                }
-                else if (way > 4)
-                {
-                    way = 4;
-                }
-            }
-        }
-
-
-        public override string ToStringInfos(){
-            return String.Format("The pedestrian {0} take the {1} footpath to move on the {2} way and exit the intersection.", this.id, this.direction, this.way);
+            return String.Format("The pedestrian {0} take the {1} footpath to move on the {2} way and exit the intersection.", this._id, this._direction, this._way);
         }
     }
 }

@@ -16,11 +16,15 @@ namespace TrafficSimulation.Road.Intersections
             int[] green = new int[]{0, 2};
             int[] red = new int[]{1, 3};
             int[] temp = new int[]{};
+
             Console.WriteLine("All trafficlights is red!\n");
+
+            // Generate vehicles
             this._traffic.GenerateRandomVehicles();
             Console.WriteLine("");
+
             int cycle = 0;
-            while (!_traffic.stop)
+            while (!_traffic.Stop)
             {
                 cycle++;
                 // 2 ways turn green
@@ -33,12 +37,16 @@ namespace TrafficSimulation.Road.Intersections
                 temp = red;
                 red = green;
                 green = temp;
+
+                // Check if the simulation is ended and ask the user:
                 if (cycle == 2)
                 {
                     if (!this._traffic.StopMenu())
                     {
                         return;
                     }
+
+                    // Regenerate vehicles
                     this._traffic.GenerateRandomVehicles();
                     Console.WriteLine("");
                     cycle = 0;
@@ -51,15 +59,13 @@ namespace TrafficSimulation.Road.Intersections
             for (int i = 0; i < trafficlights.Length; i++)
             {
                 Way way = this.Ways[trafficlights[i]];
-                TrafficLight tf = ((WayTrafficLight)way).trafficLight;
+                TrafficLight tf = ((WayTrafficLight)way).Trafficlight;
                 tf.SetNextTrafficLightColor();
                 Thread.Sleep(250);
                 int pass = 0;
-                while (tf.Color == TrafficLightColor.Green && way.vehiclesQueue.Count > 0 && pass <= 2)
+                while (tf.Color == TrafficLightColor.Green && way.VehiclesQueue.Count > 0 && pass <= 2)
                 {
-                    Vehicle veh = way.vehiclesQueue.ElementAt(0);
-                    Console.WriteLine(veh.ToStringInfos());
-                    this.RemoveVehicleInQueue(trafficlights[i] + 1);
+                    this.EmptyVehicleQueue(trafficlights[i] + 1);
                     pass++;
                 }
             }

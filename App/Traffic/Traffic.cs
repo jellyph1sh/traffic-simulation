@@ -6,28 +6,74 @@ namespace TrafficSimulation
 {
     public class Traffic
     {
-        Intersection intersection;
-        public bool stop = false;
+        private Intersection _intersection;
+        private bool _stop = false;
+        private int _idCar = 0;
+        private int _idTruck = 0;
+        private int _idBus = 0;
+        private int _idMotorcycle = 0;
 
-        int idCar = 0;
-        int idTruck = 0;
-        int idBus = 0;
-        int idMotorcycle = 0;
         public Traffic(int intersection)
         {
             switch (intersection)
             {
                 case 1:
-                    this.intersection = new InterTrafficLight(this);
+                    this._intersection = new InterTrafficLight(this);
                     break;
                 case 2:
-                    this.intersection = new Intersection(this);
+                    this._intersection = new Intersection(this);
                     break;
                 default:
-                    this.intersection = new Intersection(this);
+                    this._intersection = new Intersection(this);
                     break;
             }
-            this.intersection.Run();
+            this._intersection.Run();
+        }
+
+        public bool Stop
+        {
+            get { return _stop; }
+            set { _stop = value; }
+        }
+
+        public int IdCar
+        {
+            get { return _idCar; }
+            set
+            {
+                if (value < 0) return;
+                _idCar = value;
+            }
+        }
+
+        public int IdTruck
+        {
+            get { return _idTruck; }
+            set
+            {
+                if (value < 0) return;
+                _idTruck = value;
+            }
+        }
+
+        public int IdBus
+        {
+            get { return _idBus; }
+            set
+            {
+                if (value < 0) return;
+                _idBus = value;
+            }
+        }
+
+        public int IdMotorcycle
+        {
+            get { return _idMotorcycle; }
+            set
+            {
+                if (value < 0) return;
+                _idMotorcycle = value;
+            }
         }
 
         public bool StopMenu()
@@ -39,8 +85,8 @@ namespace TrafficSimulation
                 Console.Clear();
                 int intersection = Program.SelectIntersectionMenu();
                 Traffic traffic = new Traffic(intersection);
-                this.intersection.Run();
-                this.stop = true;
+                this._intersection.Run();
+                this._stop = true;
                 return false;
             }
             else if (line == "y" || line == "Y")
@@ -74,23 +120,23 @@ namespace TrafficSimulation
                 switch (type)
                 {
                     case VehicleType.Truck:
-                        idTruck++;
-                        id = idTruck;
+                        _idTruck++;
+                        id = _idTruck;
                         break;
                     case VehicleType.Bus:
-                        idBus++;
-                        id = idBus;
+                        _idBus++;
+                        id = _idBus;
                         break;
                     case VehicleType.Motorcycle:
-                        idMotorcycle++;
-                        id = idMotorcycle;
+                        _idMotorcycle++;
+                        id = _idMotorcycle;
                         break;
                     default:
-                        idCar++;
-                        id = idCar;
+                        _idCar++;
+                        id = _idCar;
                         break;
                 }
-                this.intersection.AddVehicleInQueue(new Vehicle(id, type, way, direction));
+                this._intersection.AddVehicleInQueue(new Vehicle(id, type, way, direction));
                 Thread.Sleep(250);
             }
         }

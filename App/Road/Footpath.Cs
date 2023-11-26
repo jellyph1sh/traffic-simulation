@@ -4,18 +4,18 @@ namespace TrafficSimulation
 {
     public class Footpath
     {
-        int id;
-        Pedestrian[] pedestrians;
-        public Footpath()
+        private int _id = 0;
+        public List<Pedestrian> Pedestrians;
+
+        public Footpath(int id)
         {
-            this.id = 0;
-            this.pedestrians = new Pedestrian[0];
+            this._id = id;
+            this.Pedestrians = new List<Pedestrian>();
         }
 
-        public Footpath(int id, Pedestrian[] pedestrians)
+        public int Id
         {
-            this.id = id;
-            this.pedestrians = pedestrians;
+            get { return _id; }
         }
     }
 }

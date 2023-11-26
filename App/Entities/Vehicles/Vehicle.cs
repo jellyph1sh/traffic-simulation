@@ -2,54 +2,51 @@ namespace TrafficSimulation.Entities.Vehicle
 {
     public class Vehicle : Entity, IEntity
     {   
-        public VehicleType type = VehicleType.Car;
-        public Vehicle():base()
+        private VehicleType _type = VehicleType.Car;
+        public VehicleType Type
         {
-            this.type = VehicleType.Car;
+            get { return _type; }
         }
-        public Vehicle(int id, VehicleType type, int way, int direction)
+        
+        public Vehicle(int id, VehicleType type, int way, int direction) : base(id, way, direction)
         {
-            this.id = id;
-            this.type = type;
-            this.way = way;
-            this.direction = direction;
-            Console.WriteLine(String.Format("{0}{1} arrives on way {2} and stops.", this.type, this.id, this.way));
+            this._type = type;
+            Console.WriteLine(String.Format("{0}{1} arrives on way {2} and stops.", this._type, this._id, this._way));
         }
-        public int Direction
+
+        public int Id
         {
-            get { return direction; }
-            set 
-            { 
-                direction = value;
-                if (direction < 1)
-                {
-                    direction = 1;
-                }
-                else if (direction > 4)
-                {
-                    direction = 4;
-                }
+            get { return this._id; }
+            set
+            {
+                if (value < 0) return;
+                _id = value;
             }
         }
+
         public int Way
         {
-            get { return way; }
-            set 
-            { 
-                way = value;
-                if (way < 1)
-                {
-                    way = 1;
-                }
-                else if (way > 4)
-                {
-                    way = 4;
-                }
+            get { return _way; }
+            set
+            {
+                if (value < 1 || value > 4) return;
+                _way = value;
             }
         }
+
+        public int Direction
+        {
+            get { return _direction; }
+            set
+            {
+                if (value < 1 || value > 4) return;
+                _direction = value;
+            }
+        }
+
         public override string ToStringInfos()
         {
-            return String.Format("The {0}{1} on the way {2} moves forward into way {3} and exits the intersection.", this.type, this.id, this.way, this.direction);
+            return String.Format("The {0}{1} on the way {2} moves forward into way {3} and exits the intersection.", this._type, this._id, this._way, this._direction);
         }
     }
 }

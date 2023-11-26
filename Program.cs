@@ -1,6 +1,4 @@
-﻿using TrafficSimulation;
-
-namespace TrafficSimulation.Run
+﻿namespace TrafficSimulation.Run
 {
     class Program
     {
