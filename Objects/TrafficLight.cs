@@ -1,7 +1,14 @@
 namespace TrafficSimulation.Objects
 {
     public class TrafficLight {
+        public int wayId;
         public TrafficLightColor Color = TrafficLightColor.Red;
+        
+        public TrafficLight(int wayId)
+        {
+            this.wayId = wayId;
+        }
+
         public void SetNextTrafficLightColor()
         {
             switch(this.Color){
@@ -18,6 +25,7 @@ namespace TrafficSimulation.Objects
                     this.Color = TrafficLightColor.None;
                     break;
             }
+            Console.WriteLine(String.Format("Trafficlight way {0}, turn on {1}.", this.wayId, this.Color));
         }
     }
 }
