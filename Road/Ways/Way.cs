@@ -2,7 +2,7 @@ using TrafficSimulation.Entities.Vehicle;
 
 namespace TrafficSimulation.Road.Ways
 {
-    public abstract class Way
+    public class Way
     {
         private int _id = 0;
         public int Id
@@ -16,12 +16,12 @@ namespace TrafficSimulation.Road.Ways
                 _id = value;
             }
         }
-        public Vehicle[] vehiclesQueue;
+        public List<Vehicle> vehiclesQueue;
 
-        public Way(int id, Vehicle[] vehiclesQueue)
+        public Way(int id)
         {
             this._id = id;
-            this.vehiclesQueue = vehiclesQueue;
+            this.vehiclesQueue = new List<Vehicle>();
         }
     }
 }

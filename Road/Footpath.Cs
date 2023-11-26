@@ -1,3 +1,5 @@
+using TrafficSimulation.Entities.Pedestrian;
+
 namespace TrafficSimulation
 {
     public class Footpath

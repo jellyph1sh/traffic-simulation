@@ -1,11 +1,13 @@
 using TrafficSimulation.Objects;
-using TrafficSimulation.Entities.Vehicle;
 
 namespace TrafficSimulation.Road.Ways
 {
     public class WayTrafficLight : Way
     {
-        public TrafficLight TrafficLight = new TrafficLight();
-        public WayTrafficLight(int id, Vehicle[] vehiclesQueue) : base(id, vehiclesQueue) {}
+        public TrafficLight trafficLight;
+        public WayTrafficLight(int id) : base(id)
+        {
+            this.trafficLight = new TrafficLight(this.Id);
+        }
     }
 }
