@@ -49,7 +49,7 @@ namespace TrafficSimulation.Entities.Pedestrian
 
 
         public override string ToStringInfos(){
-            return String.Format("The pedestrian {0} take the {1} footpath to move on the {2} way.", this.id, this.direction, this.way);
+            return String.Format("The pedestrian {0} take the {1} footpath to move on the {2} way and exit the intersection.", this.id, this.direction, this.way);
         }
     }
 }
