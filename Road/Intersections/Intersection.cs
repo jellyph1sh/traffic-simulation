@@ -13,49 +13,90 @@ namespace TrafficSimulation.Road.Intersections
             this.Ways = new Way[]{new Way(1), new Way(2), new Way(3), new Way(4)};
         }
 
-        public void Run()
+        public virtual void Run()
         {
-            int[] green = new int[]{0, 2};
-            int[] red = new int[]{1, 3};
-            int[] temp = new int[]{};
-            Console.WriteLine("All trafficlights is red!\n");
             this._traffic.GenerateRandomVehicles();
+            Thread.Sleep(1000);
             Console.WriteLine("");
-            int cycle = 0;
             while (!_traffic.stop)
             {
-                cycle++;
-                // 2 ways turn green
-                TrafficLightsNextCycle(green, 5000);
-                // 2 ways turn orange
-                TrafficLightsNextCycle(green, 1000);
-                // 2 ways turn red
-                TrafficLightsNextCycle(green, 0);
+                if (!this.HaveWayEmpty())
+                {
+                    Vehicle veh = this.Ways[0].vehiclesQueue.ElementAt(0);
+                    Console.WriteLine(veh.ToStringInfos());
+                    this.RemoveVehicleInQueue(1);
+                    this.Ways[0].IsEmpty = true;
+                }
+                int way = 1;
+                while (way <= 4)
+                {
+                    int checkWay = way - 1;
+                    if (way == 1)
+                    {
+                        checkWay = 4;
+                    }
+                    while (this.Ways[checkWay - 1].vehiclesQueue.Count == 0 && this.Ways[way - 1].vehiclesQueue.Count > 0)
+                    {
+                        Vehicle veh = this.Ways[way - 1].vehiclesQueue.ElementAt(0);
+                        Console.WriteLine(veh.ToStringInfos());
+                        this.RemoveVehicleInQueue(way);
+                        Thread.Sleep(1000);
+                    }
 
-                temp = red;
-                red = green;
-                green = temp;
-                if (cycle == 2)
+                    way++;
+                }
+
+                if (CheckIfWaysIsEmpty())
                 {
                     if (!this._traffic.StopMenu())
                     {
                         return;
                     }
-                    this._traffic.GenerateRandomVehicles();
                     Console.WriteLine("");
-                    cycle = 0;
+                    this._traffic.GenerateRandomVehicles();
+                    Thread.Sleep(1000);
+                    Console.WriteLine("");
                 }
             }
+            Console.WriteLine("");
         }
 
         public void AddVehicleInQueue(Vehicle veh)
         {
-            this.Ways[veh.Way-1].vehiclesQueue.Add(veh);
+            Way way = this.Ways[veh.Way-1];
+            way.vehiclesQueue.Add(veh);
+            if (way.vehiclesQueue.Count > 0)
+            {
+                way.IsEmpty = false;
+            }
         }
 
         public void RemoveVehicleInQueue(int wayId)
         {
-            this.Ways[wayId].vehiclesQueue.RemoveAt(0);
+            Way way = this.Ways[wayId-1];
+            way.vehiclesQueue.RemoveAt(0);
+            if (way.vehiclesQueue.Count == 0)
+            {
+                way.IsEmpty = true;
+            }
+        }
+
+        public bool CheckIfWaysIsEmpty()
+        {
+            foreach (var way in this.Ways)
+            {
+                if (!way.IsEmpty) return false;
+            }
+            return true;
+        }
+
+        public bool HaveWayEmpty()
+        {
+            foreach (var way in this.Ways)
+            {
+                if (way.vehiclesQueue.Count == 0) return true;
+            }
+            return false;
         }
     }
 }

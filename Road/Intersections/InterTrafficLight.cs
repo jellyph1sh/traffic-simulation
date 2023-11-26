@@ -11,7 +11,7 @@ namespace TrafficSimulation.Road.Intersections
             this.Ways = new Way[]{new WayTrafficLight(1), new WayTrafficLight(2), new WayTrafficLight(3), new WayTrafficLight(4)};
         }
 
-        public void Run()
+        public override void Run()
         {
             int[] green = new int[]{0, 2};
             int[] red = new int[]{1, 3};
@@ -59,7 +59,7 @@ namespace TrafficSimulation.Road.Intersections
                 {
                     Vehicle veh = way.vehiclesQueue.ElementAt(0);
                     Console.WriteLine(veh.ToStringInfos());
-                    this.RemoveVehicleInQueue(trafficlights[i]);
+                    this.RemoveVehicleInQueue(trafficlights[i] + 1);
                     pass++;
                 }
             }

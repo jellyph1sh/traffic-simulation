@@ -13,7 +13,7 @@ namespace TrafficSimulation.Entities.Vehicle
             this.type = type;
             this.way = way;
             this.direction = direction;
-            Console.WriteLine(String.Format("A {0} arrives on way {1} and stops at the red light.", this.type, this.way));
+            Console.WriteLine(String.Format("{0}{1} arrives on way {2} and stops.", this.type, this.id, this.way));
         }
         public int Direction
         {

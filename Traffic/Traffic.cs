@@ -15,14 +15,19 @@ namespace TrafficSimulation
         int idMotorcycle = 0;
         public Traffic(int intersection)
         {
-            if (intersection == 1)
+            switch (intersection)
             {
-                this.intersection = new InterTrafficLight(this);
+                case 1:
+                    this.intersection = new InterTrafficLight(this);
+                    break;
+                case 2:
+                    this.intersection = new Intersection(this);
+                    break;
+                default:
+                    this.intersection = new Intersection(this);
+                    break;
             }
-            else if (intersection == 2)
-            {
-                this.intersection = new Intersection(this);
-            }
+            this.intersection.Run();
         }
 
         public bool StopMenu()
@@ -31,6 +36,7 @@ namespace TrafficSimulation
             string line = Console.ReadLine() ?? "";
             if (line == "" || line == "n" || line == "N")
             {
+                Console.Clear();
                 int intersection = Program.SelectIntersectionMenu();
                 Traffic traffic = new Traffic(intersection);
                 this.intersection.Run();
@@ -39,6 +45,7 @@ namespace TrafficSimulation
             }
             else if (line == "y" || line == "Y")
             {
+                Console.Clear();
                 return true;
             }
             else
@@ -52,7 +59,7 @@ namespace TrafficSimulation
         public void GenerateRandomVehicles()
         {
             Random rnd = new Random();
-            int nbVehicles = rnd.Next(11);
+            int nbVehicles = rnd.Next(1, 11);
             for (int i = 0; i < nbVehicles; i++)
             {
                 int way = rnd.Next(1, 5);
@@ -84,6 +91,7 @@ namespace TrafficSimulation
                         break;
                 }
                 this.intersection.AddVehicleInQueue(new Vehicle(id, type, way, direction));
+                Thread.Sleep(250);
             }
         }
     }

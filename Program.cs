@@ -4,11 +4,11 @@ namespace TrafficSimulation.Run
 {
     class Program
     {
-        static Traffic traffic;
+        private static Traffic? traffic;
         static void Main(string[] str)
         {
             int intersection = SelectIntersectionMenu();
-            traffic = new Traffic(intersection);
+            Program.traffic = new Traffic(intersection);
         }
 
         public static int SelectIntersectionMenu()
@@ -23,6 +23,7 @@ namespace TrafficSimulation.Run
                     intersectionNb = Int32.Parse(line);
                     if (intersectionNb == 3)
                     {
+                        Console.Clear();
                         System.Environment.Exit(0);
                     }
                     else if (intersectionNb < 1 || intersectionNb > 2)
@@ -36,6 +37,7 @@ namespace TrafficSimulation.Run
                 }
             } while (intersectionNb == 0);
 
+            Console.Clear();
             return intersectionNb;
         }
     }

@@ -16,6 +16,7 @@ namespace TrafficSimulation.Road.Ways
                 _id = value;
             }
         }
+        public bool IsEmpty = true;
         public List<Vehicle> vehiclesQueue;
 
         public Way(int id)
