@@ -1,33 +1,41 @@
-﻿﻿namespace TrafficSimulation.Run
+﻿namespace TrafficSimulation.Run
 {
     class Program
     {
+        private static Traffic? traffic;
         static void Main(string[] str)
         {
-            SelectIntersectionMenu();
+            int intersection = SelectIntersectionMenu();
+            Program.traffic = new Traffic(intersection);
         }
 
-        private static int SelectIntersectionMenu()
+        public static int SelectIntersectionMenu()
         {
             int intersectionNb = 0;
             do
             {
-                Console.Write("Which intersection you want ? (1: TrafficLight / 2: GiveAway) >> ");
+                Console.Write("Which intersection you want ? (1: TrafficLight / 2: GiveAway / 3: Exit) >> ");
                 string line = Console.ReadLine() ?? "";
                 try
                 {
                     intersectionNb = Int32.Parse(line);
-                    if (intersectionNb < 1 || intersectionNb > 2)
+                    if (intersectionNb == 3)
+                    {
+                        Console.Clear();
+                        System.Environment.Exit(0);
+                    }
+                    else if (intersectionNb < 1 || intersectionNb > 2)
                     {
                         intersectionNb = 0;
                     }
                 }
                 catch (FormatException)
                 {
-                    Console.WriteLine($"Invalid answer!");
+                    Console.WriteLine("Invalid answer!");
                 }
             } while (intersectionNb == 0);
 
+            Console.Clear();
             return intersectionNb;
         }
     }
